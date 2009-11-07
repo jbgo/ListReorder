@@ -1,0 +1,73 @@
+body {
+	text-align:center;
+}
+
+h3 {
+	clear: both;
+}
+
+ul, ol {
+	float:left;
+	width: 150px;
+	margin:25px;
+}
+
+#wrap {
+	width: 600px;
+	margin: 0 auto;
+	text-align:left;
+}
+
+#example2out {
+	clear: both;
+	width: 400px;
+	height: 100px;
+	border: 1px solid #999;
+	margin-left: 25px;
+	padding: 5px;
+}
+
+#example2 input {
+	margin-left:25px;
+}
+
+.dragHandle {
+	display: block;
+	float: right;
+	width: 10px;
+	height: 10px;
+	border: 2px solid #06f;
+	background: #fff;
+	cursor: move;
+}
+
+ul.lists {
+	list-style: none;
+	padding: 0;
+	border-left: 3px solid #06f;
+	border-top: 1px solid #999;
+}
+
+.lists li {
+	margin: 0;
+	padding: 10px 3px;
+	border: 1px solid #999;
+	border-top: 0;
+	border-left-color: #06f;
+	background: #f6f6f6;
+}
+
+.myItemHover {
+	background: #cef;
+}
+
+.myDragTarget {
+	background: #cef;
+	opacity: 0.7;
+	border: 2px dashed #f90;
+	padding: 10px 3px; /* matches '.list li' padding */
+}
+
+.lists .myDropTarget {
+	background: #ccc;
+}

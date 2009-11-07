@@ -1,0 +1,215 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
+	<title>List Reorder</title>
+	<link rel="stylesheet" type="text/css" href="list-reorder.css"/>
+</head>
+<body>
+
+<div id="wrap">
+
+	<h1>List Reorder</h1>
+	
+	<p><strong>A jQuery plugin by <a href="http://www.utdallas.edu/~jrb048000/">Jordan Bach</a>.</strong></p>
+	
+	<p><a href="http://www.utdallas.edu/~jrb048000/ListReorder/ListReorder.zip">Download List Reorder</a></p>
+	
+	<p>List Reorder is a jQuery plugin that allows you to reorder any simple ordered or unordered
+	list. List Reorder is easy to use and does not require any additional markup. Its look and feel
+	is completely customizable using a set of CSS classes. It is distributed under the terms of the <a href="http://www.opensource.org/licenses/mit-license.php">MIT license</a>.</p>
+	
+	<p>Obviously, List Reorder requires the <a href="http://jquery.com/">jQuery Javascript library</a> because it is a jQuery plugin. Additionally, it requires the <a href="http://www.jdempster.com/category/jquery/disabletextselect/">Disable Text Select plugin</a>. For your convenience, both are packaged with this plugin along with the HTML and CSS sources for this example page. To use List Reorder on your own pages, you must first include the jQuery library, the Disable Text Select plugin, the List Reorder plugin, and your custom code in that order.</p>
+
+<!-- Example One -->
+	
+	<div id="example1">
+	
+	<h2>A simple example</h2>
+	
+	<p>Here we make two unstyled lists reorderable. You select the list as you would select any other DOM node using jQuery's CSS selector capabilities. Also, you must specify styles for the drag handle or it will not be visible. If it is not visible, you can't reorder your list! Optionally you could set the useDefaultDragHandle option to true. Click-drag the gray box to the right of the list items to reorder the list.</p>
+	
+	<ul id="list1">
+		<li>It's 2009.</li>
+		<li>We're gonna party...</li>
+		<li>...like it's 2009.</li>
+		<li>Yeah!</li>
+	</ul>
+	
+	<ol id="list2">
+		<li>Armadillo</li>
+		<li>Bobcat</li>
+		<li>Cougar</li>
+		<li>Dog</li>
+		<li>Eagle</li>
+	</ol>
+	
+	<h3>The Javascript Code</h3>
+	
+	<pre>
+$(document).ready(function() {	
+	var unordered = $('ul#list1').ListReorder();
+	var ordered = $('ol').ListReorder();
+});
+	</pre>
+
+	<strong>Use CSS to make the drag handle visible.</strong>
+	
+	<pre>
+.dragHandle {
+	display: block;
+	float: right;
+	width: 10px;
+	height: 10px;
+	border: 2px solid #06f;
+	background:#fff;
+	cursor: move;
+}
+	</pre>
+	
+	<p>* It is important to specify a background color/image for the drag handle, otherwise Internet Explorer will not detect mouseover or mouseclick events on the element.</p>
+	
+</div>
+
+<!-- Example Two -->
+
+<div id="example2">
+
+	<h2>Multiple Lists with Event Handling and Custom Styles</h2>
+	
+	<p>In this example we override the default options so we can use our custom CSS classes. You can style the lists almost any way you want, but the list items must be arranged vertically (for now). Also notice that we're using the default dragHandle for this example.</p>
+	<p>Next we bind an event handler function to the &quot;listorderchanged&quot; event. Whenever the order of either list changes, the output in the box below the lists is updated, showing the new order. The list order is given as an array where the value for each index corresponds to the original position of that item in the list. Clicking on either of the reset buttons will restore the items in that list to their original order.</p>
+	
+	<ul id="List A" class="lists">
+		<li>Item One</li>
+		<li>Item Two</li>
+		<li>Item Three</li>
+		<li>Item Four</li>
+	</ul>
+	
+	<ul id="List B" class="lists">
+		<li>Actual</li>
+		<li>Bonanza</li>
+		<li>Come</li>
+		<li>Dawn</li>
+	</ul>
+	
+	<pre id="example2out">Event Handler Output</pre>
+	
+	<input type="button" value="Reset List A" />
+	<input type="button" value="Reset List B" />
+	
+	<h3>Javascript Code</h3>
+	
+	<pre>
+$(document).ready(function() {
+	var options = {
+		itemHoverClass : 'myItemHover',
+		dragTargetClass : 'myDragTarget',
+		dropTargetClass : 'myDropTarget',
+		useDefaultDragHandle : true
+	};
+	
+	var lists = $('.lists').ListReorder(options);
+	
+	lists.bind('listorderchanged', function(evt, jqList, listOrder) {
+		var str = jqList.attr('id') + " order changed: \n"
+				+ "\tcurrent -- original\n";
+		for (var i = 0; i < listOrder.length; i++)
+			str += "\t" + i + " -- " + listOrder[i] + "\n";
+		
+		$('#example2out').html(str);
+	});
+	
+	$('#example2 input').click(function(){
+		if ($(this).attr('value') == 'Reset List A')
+			lists.get(0).restoreOrder();
+		else
+			lists.get(1).restoreOrder();
+		return false;
+	});
+});
+	</pre>
+	
+	<h3>Custom CSS Styles</h3>
+	
+	<pre>
+ul.lists {
+	list-style: none;
+	padding: 0;
+	border-left: 3px solid #06f;
+	border-top: 1px solid #999;
+}
+
+.lists li {
+	margin: 0;
+	padding: 10px 3px;
+	border: 1px solid #999;
+	border-top: 0;
+	border-left-color: #06f;
+	background: #f6f6f6;
+}
+
+.myItemHover {
+	background: #cef;
+}
+
+.myDragTarget {
+	background: #cef;
+	opacity: 0.7;
+	border: 2px dashed #f90;
+	padding: 10px 3px; /* matches '.list li' padding */
+}
+
+.lists .myDropTarget {
+	background: #ccc;
+}
+	</pre>
+
+</div>
+
+</div>
+	
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+<script type="text/javascript" src="jquery.disable.text.select.pack.js"></script>
+<script type="text/javascript" src="jquery.listreorder.js"></script>
+<script type="text/javascript">
+
+// Example One
+$(document).ready(function() {	
+	var unordered = $('ul#list1').ListReorder();
+	var ordered = $('ol').ListReorder();
+});
+
+// Example Two
+$(document).ready(function() {
+	var options = {
+		itemHoverClass : 'myItemHover',
+		dragTargetClass : 'myDragTarget',
+		dropTargetClass : 'myDropTarget',
+		useDefaultDragHandle : true
+	};
+	
+	var lists = $('.lists').ListReorder(options);
+	
+	lists.bind('listorderchanged', function(evt, jqList, listOrder) {
+		var str = jqList.attr('id') + " order changed: <br />"
+				+ "\tcurrent -- original<br />";
+		for (var i = 0; i < listOrder.length; i++)
+			str += "\t" + i + " -- " + listOrder[i] + "<br />";
+		
+		$('#example2out').html(str);
+	});
+	
+	$('#example2 input').click(function(){
+		if ($(this).attr('value') == 'Reset List A')
+			lists.get(0).restoreOrder();
+		else
+			lists.get(1).restoreOrder();
+		return false;
+	});
+});
+
+</script>
+</body>
+</html>
