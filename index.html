@@ -29,12 +29,15 @@
 	
 	<p>Here we make two unstyled lists reorderable. You select the list as you would select any other DOM node using jQuery's CSS selector capabilities. Also, you must specify styles for the drag handle or it will not be visible. If it is not visible, you can't reorder your list! Optionally you could set the useDefaultDragHandle option to true. Click-drag the gray box to the right of the list items to reorder the list.</p>
 	
-	<ul id="list1">
-		<li>It's 2009.</li>
-		<li>We're gonna party...</li>
-		<li>...like it's 2009.</li>
-		<li>Yeah!</li>
-	</ul>
+	<div style="position:relative">
+	<!-- This extra div is not necessary. It's just here to test for the presence (or absence) of a positioning bug. -->
+		<ul id="list1">
+			<li>It's 2009.</li>
+			<li>We're gonna party...</li>
+			<li>...like it's 2009.</li>
+			<li>Yeah!</li>
+		</ul>
+	</div>
 	
 	<ol id="list2">
 		<li>Armadillo</li>

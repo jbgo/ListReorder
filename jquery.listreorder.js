@@ -153,8 +153,8 @@ $.fn.ListReorder = function (options) {
 			// Show the drag target
 			dragTarget.html(li.html());
 			dragTarget.css('display', 'block');
-			offset.top = e.pageY - li.offset().top;
-			offset.left = e.pageX - li.offset().left;
+			offset.top = e.pageY - li.position().top;
+			offset.left = e.pageX - li.position().left;
 			updateDragTargetPos(e);
 			
 			// Insert the placeholder
