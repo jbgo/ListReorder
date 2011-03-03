@@ -67,7 +67,3 @@ ul.lists {
 	border: 2px dashed #f90;
 	padding: 10px 3px; /* matches '.list li' padding */
 }
-
-.lists .myDropTarget {
-	background: #ccc;
-}
