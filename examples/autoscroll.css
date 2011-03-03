@@ -3,11 +3,11 @@ ul {
   padding: 0;
 }
 .dragHandle {
-	display: inline-block;
-	width: 10px;
-	height: 10px;
-	border: 2px solid #06f;
-	background: #fff;
-	cursor: move;
-	margin-right: 5px;
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border: 2px solid #06f;
+  background: #fff;
+  cursor: move;
+  margin-right: 5px;
 }
