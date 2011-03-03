@@ -16,11 +16,9 @@
 
 $(document).ready(function() {
 	var list = $('ul#long_list');
-	console.profile();
 	for (var i = 0; i < 5000; ++i) {
 		$('<li/>').text('List Item ' + i).appendTo(list);
 	}
-	console.profileEnd();
 	list.ListReorder();
 });
 
